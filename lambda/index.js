@@ -1,8 +1,7 @@
 exports.handler = async (event) => {
-    // TODO implement
-    const response = {
-        statusCode: 200,
-        body: JSON.stringify('Something to test + hello + new try'),
-    };
-    return response;
+  const response = {
+    statusCode: 200,
+    body: JSON.stringify('Test your lambda deployment using AWS CodeBuild'),
+  };
+  return response;
 };
