@@ -1,17 +1,17 @@
 version: 0.2
 phases:
   install:
-    runtime-versions:
-      nodejs: 14
     commands:
       - echo "Installing dependencies..."
-      - npm i
+      - pip install boto3
+      - pip install gitpython
+      #      or install your dependencies from requirements.txt
+      #      - pip i#nstall -r requirements.txt -t lib
+      - echo "Finish installing dependencies"
   build:
     commands:
-      - echo "Zipping deployment package..."
-      - zip -r deployment_package.zip ./
-  post_build:
-    commands:
-      - echo "Updating lambda Function..."
-      - aws lambda update-function-code --function-name codebuild-deploy-lamda --zip-file fileb://deployment_package.zip
-      - echo "DONE!!"
+      - echo "begin build step & loading deployment script from s3"
+      - aws s3 cp s3://codebuild-metadata/deploy-lambda.py deploy-lambda.py
+      - echo "run deployment script"
+      - python deploy-lambda.py
+      - echo "finish deployment"
