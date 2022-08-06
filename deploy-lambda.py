@@ -62,7 +62,7 @@ for dynamodb_item in dynamodb_data:
     item_dictionary = dynamodb_json_to_dictionary(dynamodb_item)
 
     repo_url = item_dictionary.get("repoUrl")
-    print(f'repo_url {repo_url}')
+    print(f'start processing {repo_url} repository')
     assert repo_url, 'repo_url must no be null'
 
     # get the latest commit hash for each tag
